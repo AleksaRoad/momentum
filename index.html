@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="assets/favicon.ico" rel="shortcut icon" />
+    <link rel="stylesheet" href="./css/owfont-regular.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>momentum</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="player">
+        <div class="player-controls">
+          <button class="play-prev player-icon"></button>
+          <button class="play player-icon"></button>
+          <button class="play-next player-icon"></button>
+        </div>
+        <ul class="play-list"></ul>
+      </div>
+      <div class="weather">
+        <input class="city" type="text" />
+        <i class="weather-icon owf"></i>
+        <div class="duo">
+          <div class="temperature"></div>
+          <div class="weather-description"></div>
+        </div>
+        <div class="wind"></div>
+        <div class="humidity"></div>
+        <div class="error">
+          <img src="./assets/img/error.png" alt="error" />
+        </div>
+      </div>
+    </header>
+    <main class="main">
+      <div class="slider-icons">
+        <button class="slide-prev slider-icon"></button>
+        <button class="slide-next slider-icon"></button>
+      </div>
+      <time class="time"></time>
+      <date class="date"></date>
+      <div class="greeting-container">
+        <span class="greeting"></span>
+        <input type="text" class="nameInput" />
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="settings">
+        <ul class="settings-list">
+          <li>
+            <p>время</p>
+            <label class="switch">
+              <input type="checkbox" class="checkbox" checked />
+              <span class="slider round"></span>
+            </label>
+          </li>
+          <li>
+            <p>дата</p>
+            <label class="switch">
+              <input type="checkbox" class="checkbox" checked />
+              <span class="slider round"></span>
+            </label>
+          </li>
+          <li>
+            <p>приветствие</p>
+            <label class="switch">
+              <input type="checkbox" class="checkbox" checked />
+              <span class="slider round"></span>
+            </label>
+          </li>
+          <li>
+            <p>цитата</p>
+            <label class="switch">
+              <input type="checkbox" class="checkbox" checked />
+              <span class="slider round"></span>
+            </label>
+          </li>
+          <li>
+            <p>погода</p>
+            <label class="switch">
+              <input type="checkbox" class="checkbox" checked />
+              <span class="slider round"></span>
+            </label>
+          </li>
+          <li>
+            <p>github</p>
+            <label class="switch">
+              <input type="checkbox" class="checkbox" checked />
+              <span class="slider round"></span>
+            </label>
+          </li>
+          <li>
+            <p>unsplash</p>
+            <label class="switch">
+              <input type="checkbox" class="checkbox" />
+              <span class="slider round"></span>
+            </label>
+          </li>
+          <li>
+            <p>flickr</p>
+            <label class="switch">
+              <input type="checkbox" class="checkbox"/>
+              <span class="slider round"></span>
+            </label>
+          </li>
+          <li>
+            <p>поиск</p>
+            <input type="search" class="search" />
+          </li>
+          <li class="language">
+            <p>язык</p>
+            <input
+              type="radio"
+              class="custom-radio"
+              name="language"
+              type="radio"
+              id="ru"
+              value="ru"
+              checked="true"
+            />
+            <label for="ru">ru</label
+            ><input
+              type="radio"
+              class="custom-radio"
+              type="radio"
+              name="language"
+              id="en"
+              value="en"
+            />
+            <label for="en">en</label>
+            
+          </li>
+        </ul>
+        <img
+          src="../assets/svg/settings.svg"
+          alt="settings"
+          class="settings-icon"
+        />
+      </div>
+      <img src="../assets/svg/reload.svg" alt="reload" class="change-quote" />
+      <div class="data-quote">
+        <div class="quote"></div>
+        <div class="author"></div>
+      </div>
+    </footer>
+    <script src="./js/main.js"></script> 
+    <script src="./js/settings.js"></script>    
+    <script src="./js/language.js"></script>
+    <script src="./js/greeting.js"></script>
+    <script src="./js/time.js"></script>
+    <script src="./js/slider.js"></script>
+    <script src="./js/quotes.js"></script>
+    <script src="./js/weather.js"></script>
+    <script src="./js/sliderAPI.js"></script>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,788 @@
+@charset "UTF-8";
+/*----------*/
+@font-face {
+  font-family: "Arial-MT";
+  src: url("../assets/fonts/Arial-MT.woff");
+  /* Путь к файлу со шрифтом */
+}
+@font-face {
+  font-family: "Harry Potter";
+  src: url("../assets/fonts/Harry Potter.ttf");
+  /* Путь к файлу со шрифтом */
+}
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+html,
+body {
+  height: 100%;
+  line-height: 1;
+  font-size: 16px;
+  color: black;
+  -webkit-tap-highlight-color: transparent;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-width: 480px;
+  min-height: 100vh;
+  font-family: "Arial", sans-serif;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  background: center/cover, rgba(0, 0, 0, 0.5);
+  background-blend-mode: multiply;
+  -webkit-transition: background-image 1s ease-in-out;
+  transition: background-image 1s ease-in-out;
+  transition-delay: 1s;
+  overflow: hidden;
+}
+
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  width: 100%;
+  height: 30vh;
+  min-height: 220px;
+  padding: 20px;
+}
+
+.player-controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 120px;
+  margin-bottom: 28px;
+}
+
+.play-list {
+  text-align: left;
+}
+
+.play-item {
+  position: relative;
+  padding: 5px;
+  padding-left: 20px;
+  list-style: none;
+  opacity: 0.8;
+  cursor: pointer;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.play-item:hover {
+  opacity: 1;
+}
+
+.play-item::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  font-weight: 900;
+}
+
+.item-active::before {
+  color: #c5b358;
+}
+
+.play {
+  width: 40px;
+  height: 40px;
+  background-size: 40px 40px;
+  background-image: url("../assets/svg/play.svg");
+}
+
+.pause {
+  background-image: url("../assets/svg/pause.svg");
+}
+
+.play-prev {
+  background-image: url("../assets/svg/play-prev.svg");
+}
+
+.play-next {
+  background-image: url("../assets/svg/play-next.svg");
+}
+
+.weather {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  row-gap: 5px;
+  width: 180px;
+  min-height: 180px;
+  text-align: left;
+  opacity: 1;
+  visibility: visible;
+  transition: all 1s linear;
+  z-index: 0;
+}
+.weather.hide {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 1s linear;
+  z-index: -1;
+}
+
+.weather-error {
+  margin-top: -10px;
+}
+
+.duo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-column-gap: 12px;
+  -moz-column-gap: 12px;
+  column-gap: 12px;
+}
+
+.weather-icon {
+  font-size: 44px;
+}
+
+.weather-icon:hover {
+  animation: shake 1.5s;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+}
+.city {
+  width: 170px;
+  height: 34px;
+  padding: 5px;
+  font-size: 20px;
+  line-height: 24px;
+  color: #fff;
+  border: 0;
+  outline: 0;
+  border-bottom: 1px solid #fff;
+  background-color: transparent;
+  overflow: hidden;
+}
+
+.city::-webkit-input-placeholder {
+  font-size: 20px;
+  color: #fff;
+  opacity: 0.6;
+}
+
+.city::-moz-placeholder {
+  font-size: 20px;
+  color: #fff;
+  opacity: 0.6;
+}
+
+.city:-ms-input-placeholder {
+  font-size: 20px;
+  color: #fff;
+  opacity: 0.6;
+}
+
+.city::-ms-input-placeholder {
+  font-size: 20px;
+  color: #fff;
+  opacity: 0.6;
+}
+
+.city::placeholder {
+  font-size: 20px;
+  color: #fff;
+  opacity: 0.6;
+}
+
+.error img {
+  width: 110px;
+  height: 110px;
+  opacity: 0;
+  transition: all 0.7s ease-in-out;
+  overflow: hidden;
+}
+
+.error img.active {
+  opacity: 0.8;
+  transition: all 0.5s linear;
+  overflow: visible;
+}
+
+.main {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  height: 40vh;
+  min-height: 260px;
+  padding: 20px;
+}
+
+.time {
+  min-height: 124px;
+  margin-bottom: 10px;
+  font-family: "Arial-MT";
+  font-size: 100px;
+  letter-spacing: -4px;
+  opacity: 1;
+  visibility: visible;
+  transition: all 1s linear;
+  z-index: 0;
+}
+.time.hide {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 1s linear;
+  z-index: -1;
+}
+
+.date {
+  min-height: 28px;
+  font-size: 24px;
+  margin-bottom: 20px;
+  opacity: 1;
+  visibility: visible;
+  transition: all 1s linear;
+  z-index: 0;
+}
+.date.hide {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 1s linear;
+  z-index: -1;
+}
+
+.greeting-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: end;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-height: 48px;
+  font-size: 40px;
+  opacity: 1;
+  visibility: visible;
+  transition: all 1s linear;
+  z-index: 0;
+}
+.greeting-container.hide {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 1s linear;
+  z-index: -1;
+}
+
+.greeting {
+  padding: 10px;
+  text-align: right;
+}
+
+.nameInput {
+  min-width: 200px;
+  max-width: 50%;
+  padding: 10px;
+  font-size: 40px;
+  text-align: left;
+  color: #fff;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.nameImput::-webkit-input-placeholder {
+  color: #fff;
+  opacity: 0.6;
+}
+
+.nameInput::-moz-placeholder {
+  color: #fff;
+  opacity: 0.6;
+}
+
+.nameInput:-ms-input-placeholder {
+  color: #fff;
+  opacity: 0.6;
+}
+
+.nameInput::-ms-input-placeholder {
+  color: #fff;
+  opacity: 0.6;
+}
+
+.nameInput::placeholder {
+  color: #fff;
+  opacity: 0.6;
+}
+
+input::-webkit-input-placeholder {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+input::-moz-placeholder {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+input:-moz-placeholder {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+input:-ms-input-placeholder {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+input:focus::-webkit-input-placeholder {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+input:focus::-moz-placeholder {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+input:focus:-moz-placeholder {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+input:focus:-ms-input-placeholder {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .time {
+    min-height: 80px;
+    font-size: 72px;
+  }
+  .greeting-container {
+    min-height: 40px;
+    font-size: 32px;
+  }
+  .greeting {
+    padding: 5px;
+  }
+  .nameInput {
+    font-size: 32px;
+    padding: 5px;
+  }
+}
+.player-icon,
+.slider-icon,
+.change-quote,
+.settings-icon {
+  width: 32px;
+  height: 32px;
+  background-size: 32px 32px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  opacity: 0.8;
+  cursor: pointer;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.player-icon:hover,
+.slider-icon:hover,
+.change-quote:hover,
+.settings-icon {
+  opacity: 1;
+}
+
+.player-icon:active,
+.slider-icon:active,
+.change-quote:active,
+.settings-icon {
+  border: 0;
+  outline: 0;
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.slider-icon {
+  position: absolute;
+  top: 50%;
+  margin-top: -16px;
+  cursor: pointer;
+}
+
+.slide-prev {
+  left: 20px;
+  background-image: url("../assets/svg/slider-prev.svg");
+}
+
+.slide-next {
+  right: 20px;
+  background-image: url("../assets/svg/slider-next.svg");
+}
+
+.footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  height: 30vh;
+  min-height: 160px;
+  padding: 20px;
+}
+
+.settings-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  text-align: start;
+  font-size: 20px;
+  color: #fff;
+  padding: 5px;
+  align-items: center;
+}
+
+.settings-list {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s linear;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.2);
+  height: 0;
+  overflow: hidden;
+}
+
+.settings-list.active {
+  visibility: visible;
+  opacity: 1;
+  transition: all 1s ease-in-out;
+  height: 500px;
+}
+
+.settings-icon {
+  justify-content: center;
+  position: relative;
+  margin-top: -15px;
+  animation: spin 4s linear infinite;
+  z-index: 6;
+  width: 45px;
+  height: 45px;
+  transition: all 0.3s linear;
+}
+
+.settings {
+  position: absolute;
+  left: 55px;
+  bottom: 40px;
+  z-index: 5;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #848585;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px rgba(143, 201, 228, 0.5);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* для элемента input c type="radio" */
+.custom-radio {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+/* для элемента label связанного с .custom-radio */
+.custom-radio + label {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+}
+
+/* создание в label псевдоэлемента  before со следующими стилями */
+.custom-radio + label::before {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 1px solid #adb5bd;
+  border-radius: 50%;
+  margin-right: 0.5em;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+}
+
+/* стили при наведении курсора на радио */
+.custom-radio:not(:disabled):not(:checked) + label:hover::before {
+  border-color: rgba(143, 201, 228, 0.5);
+}
+
+/* стили для активной радиокнопки (при нажатии на неё) */
+.custom-radio:not(:disabled):active + label::before {
+  background-color: #848585;
+  border-color: rgba(143, 201, 228, 0.5);
+}
+
+/* стили для радиокнопки, находящейся в фокусе */
+.custom-radio:focus + label::before {
+  box-shadow: 0 0 0 0.2rem rgba(143, 201, 228, 0.5);
+}
+
+/* стили для радиокнопки, находящейся в фокусе и не находящейся в состоянии checked */
+.custom-radio:focus:not(:checked) + label::before {
+  border-color: rgba(143, 201, 228, 0.5);
+}
+
+/* стили для радиокнопки, находящейся в состоянии checked */
+.custom-radio:checked + label::before {
+  border-color: rgba(143, 201, 228, 0.5);
+  background-color: #848585;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+}
+
+/* стили для радиокнопки, находящейся в состоянии disabled */
+.custom-radio:disabled + label::before {
+  background-color: #e9ecef;
+}
+
+.search {
+  max-width: 150px;
+  min-height: 32px;
+  cursor: text;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.search:focus {
+  outline-color: rgb(143, 201, 228);
+}
+
+@-moz-keyframes spin {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+  to {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.change-quote {
+  position: absolute;
+  margin-bottom: 110px;
+  opacity: 1;
+  visibility: visible;
+  transition: all 1s linear;
+  z-index: 0;
+}
+.change-quote.hide {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 1s linear;
+  z-index: -1;
+}
+
+.quote {
+  max-width: 750px;
+  min-height: 32px;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.author {
+  min-height: 20px;
+  font-style: italic;
+}
+
+.data-quote {
+  opacity: 1;
+  visibility: visible;
+  transition: all 1s linear;
+  z-index: 0;
+}
+.data-quote.hide {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 1s linear;
+  z-index: -1;
+}
