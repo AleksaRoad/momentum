@@ -4,35 +4,54 @@ function getTimeOfDay() {
   const hours = date.getHours();
 
   if (hours >= 6 && hours < 12) {
-    return "утро";
+    return lang().morning;
   }
   if (hours >= 12 && hours < 18) {
-    return "день";
+    return lang().afternoon;
   }
   if (hours >= 18 && hours < 24) {
-    return "вечер";
+    return lang().evening;
   }
   if (hours >= 0 && hours < 6) {
-    return "ночь";
+    return lang().night;
   }
 }
 //функция приветствия
 function timeOfDay() {
-  let greeting = '';
-  if(getTimeOfDay() == 'утро'){
-    greeting = 'Доброе утро,'
+  let greeting = "";
+
+  if (state.language === "en") {
+    if (getTimeOfDay() === lang().morning) {
+      greeting = "Good morning,";
+    }
+    if (getTimeOfDay() === lang().afternoon) {
+      greeting = "Good day,";
+    }
+    if (getTimeOfDay() === lang().evening) {
+      greeting = "Good evening,";
+    }
+    if (getTimeOfDay() === lang().night) {
+      greeting = "Good night,";
+    }
+    return greeting;
   }
-  if(getTimeOfDay() == 'день'){
-    greeting = 'Добрый день,'
+  if (state.language === "ru") {
+    if (getTimeOfDay() === lang().morning) {
+      greeting = "Доброе утро,";
+    }
+    if (getTimeOfDay() === lang().afternoon) {
+      greeting = "Добрый день,";
+    }
+    if (getTimeOfDay() === lang().evening) {
+      greeting = "Добрый вечер,";
+    }
+    if (getTimeOfDay() === lang().night) {
+      greeting = "Доброй ночи,";
+    }
+    return greeting;
   }
-  if(getTimeOfDay() == 'вечер'){
-    greeting = 'Добрый вечер,'
-  }
-  if(getTimeOfDay() == 'ночь'){
-    greeting = 'Доброй ночи,'
-  }
-  return greeting;
 }
+
 const nameInput = document.querySelector(".nameInput");
 //функция занесения информации в local storage
 function setLocalStorage(value) {
@@ -49,7 +68,7 @@ function getLocalStorage() {
 }
 //функция отрисовки placeholder
 function placeholder() {
-  nameInput.setAttribute("placeholder", "[Введите имя]");
+  nameInput.setAttribute("placeholder", lang().placeholder);
 }
 //отрисовка placeholder или информации из local storage
 window.addEventListener("load", placeholder);

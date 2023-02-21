@@ -14,14 +14,13 @@ async function getLinkToImageFlickr() {
 const urlF = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=090e27573acc9823416e53bfaaa1658d&per_page=500&tags=${search()}&extras=url_h&format=json&nojsoncallback=1`;
 const resF = await fetch(urlF);
 const dataF = await resF.json();
-let links = dataF.photos.photo.filter(a => Object.keys(a).includes("url_h"))
+let links = (dataF.photos.photo).filter(a => Object.keys(a).includes("url_h"))
 const randomIndex = Math.floor(Math.random() * (links.length));
 // console.log(links[randomIndex].url_h)
 let linkF = links[randomIndex].url_h
-
 localStorage.setItem("linkF", linkF)
 };
-
+getLinkToImageFlickr()
 
 // console.log(getLinkToImageFlickr())
 

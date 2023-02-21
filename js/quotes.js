@@ -20,7 +20,7 @@ async function getQuotes() {
   quoteText.textContent = quote;
   quoteAuthor.textContent = author;
   localStorage.setItem("quote", quote);
-  // quoteText.style.transition = "1s"
+// quoteText.style.transition = "1s"
 }
 getQuotes();
 //клик на reloder анимация кручения и вызов новой цитаты

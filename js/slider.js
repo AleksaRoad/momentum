@@ -12,24 +12,25 @@ function getRandomNum(min, max) {
 //функция перевода времени суток
 function daySet() {
   let dayEn = "";
-  if (getTimeOfDay() == "утро") {
-    dayEn = "morning";
+  if (getTimeOfDay() === lang().morning) {
+    dayEn = langObj.en.morning
   }
-  if (getTimeOfDay() == "день") {
-    dayEn = "afternoon";
+  if (getTimeOfDay() === lang().afternoon) {
+    dayEn = langObj.en.afternoon
   }
-  if (getTimeOfDay() == "вечер") {
-    dayEn = "evening";
+  if (getTimeOfDay() === lang().evening) {
+    dayEn = langObj.en.evening
   }
-  if (getTimeOfDay() == "ночь") {
-    dayEn = "night";
+  if (getTimeOfDay() === lang().night) {
+    dayEn = langObj.en.night
   }
+  // if (){}
   return dayEn;
 }
 //функция вывода рандомной фотографии
 function setBg() {
   //если фотохранилище Flickr
-  if (state.photoSource == "flickr") {
+  if (state.photoSource === "flickr") {
     const img = new Image();
     img.src = localStorage.getItem("linkF");
     img.onload = () => {
@@ -39,7 +40,7 @@ function setBg() {
     return img.src
   }
   //если фотохранилище Unsplash
-  if (state.photoSource == "unsplash") {
+  if (state.photoSource === "unsplash") {
     const img = new Image();
     img.src = localStorage.getItem("linkU");
     img.onload = () => {
@@ -49,7 +50,7 @@ function setBg() {
     return img.src;
   }
   //если хранилище Github
-  if (state.photoSource == "github") {
+  if (state.photoSource === "github") {
     //запись числового значения фото
     let bgNum = String(randomNum).padStart(2, "0");
     //предзагрузка изображений до отображения

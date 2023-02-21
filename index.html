@@ -85,38 +85,26 @@
           </label>
         </li>
         <li>
-          <p>github</p>
-          <label class="switch">
-            <input type="checkbox" class="checkbox" />
-            <span class="slider round"></span>
-          </label>
+          <input type="radio" class="custom-radio" name="source" id="github" value="github" checked="true" />
+          <label for="github">github</label><input type="radio" class="custom-radio" name="source" id="unsplash"
+            value="unsplash" />
+          <label for="unsplash">unsplash</label><input type="radio" class="custom-radio" name="source" id="flickr"
+            value="flickr" />
+          <label for="flickr">flickr</label>
         </li>
-        <li>
-          <p>unsplash</p>
-          <label class="switch">
-            <input type="checkbox" class="checkbox" />
-            <span class="slider round"></span>
-          </label>
-        </li>
-        <li>
-          <p>flickr</p>
-          <label class="switch">
-            <input type="checkbox" class="checkbox" />
-            <span class="slider round"></span>
-          </label>
-        </li>
+
         <li>
           <p>поиск</p>
           <div class="search-input">
-            <input class="search" type="text" placeholder=" Введите тег...">
-            <img src="./assets/img/lup.png" alt="" class="lup">
+            <input class="search" type="text" />
+            <img src="./assets/img/lup.png" alt="" class="loupe" />
           </div>
         </li>
         <li class="language">
           <p>язык</p>
-          <input type="radio" class="custom-radio" name="language" type="radio" id="ru" value="ru" checked="true" />
-          <label for="ru">ru</label><input type="radio" class="custom-radio" type="radio" name="language" id="en"
-            value="en" />
+          <input type="radio" class="custom-radio" name="language" id="ru" value="ru" />
+          <label for="ru">ru</label><input type="radio" class="custom-radio" name="language" id="en" value="en"
+            checked="true" />
           <label for="en">en</label>
         </li>
       </ul>
@@ -129,8 +117,8 @@
     </div>
   </footer>
   <script src="./js/main.js"></script>
-  <script src="./js/settings.js"></script>
   <script src="./js/language.js"></script>
+  <script src="./js/settings.js"></script>
   <script src="./js/greeting.js"></script>
   <script src="./js/time.js"></script>
   <script src="./js/slider.js"></script>
