@@ -1,3 +1,4 @@
+// import SetBg from "./slider";
 const checkboxes = document.querySelectorAll(".checkbox");
 const settings = document.querySelector(".settings-list");
 const settingsIcon = document.querySelector(".settings-icon");
@@ -15,11 +16,13 @@ const weatherBlock = document.querySelector(".weather");
 const githubCheckbox = document.getElementById("github");
 const unsplashCheckbox = document.getElementById("unsplash");
 const flickrCheckbox = document.getElementById("flickr");
+// const radioSource = document.querySelectorAll(".custom-radio");
 
 const lang = () => (state.language === "ru" ? langObj.ru : langObj.en);
 
 const [timeInput, dateInput, greetingInput, quoteInput, weatherInput] =
   checkboxes;
+// const [githubInput, unsplashInput, flickrInput] = radioSource
 
 const nodes = [
   {
@@ -48,6 +51,59 @@ const nodes = [
     block: weatherBlock,
   },
 ];
+//     {
+//     nodeName: "github",
+//     node: githubInput,
+//     block: githubBlock,
+//   },
+//   {
+//     nodeName: "flickr",
+//     incl: flickrInput,
+//     block: flickrBlock,
+//   },
+//   {
+//     nodeName: "unsplash",
+//     node: unsplashInput,
+//     block: unsplashBlock,
+//   },
+//   {
+//     nodeName: "ru",
+//     node: ruInput,
+//     block: ruBlock,
+//   },
+//   {
+//     nodeName: "en",
+//     node: enInput,
+//     block: enBlock,
+//   },
+
+// const radio = [
+//   {
+//     nodeName: "github",
+//     incl: githubInput,
+//     off: githubBlock,
+//   },
+//   {
+//     nodeName: "flickr",
+//     incl: flickrInput,
+//     off: flickrBlock,
+//   },
+//   {
+//     nodeName: "unsplash",
+//     incl: unsplashInput,
+//     off: unsplashBlock,
+//   },
+//   {
+//     nodeName: "ru",
+//     incl: ruInput,
+//     off: ruBlock,
+//   },
+//   {
+//     nodeName: "en",
+//     incl: enInput,
+//     off: enBlock,
+//   },
+// ];
 
 const state = {
   language: "en",
@@ -92,32 +148,7 @@ const setState = (inputName, isChecked, state) => {
   const element = state.blocks.find((el) => el.name === inputName);
   element.isVisible = isChecked;
 };
-//при закрытии окна добавлять state в local storage
-window.addEventListener("beforeunload", () => addToStorage(state));
-//при загрузке окна выгружать state и записыать значения в checkboxes
-window.addEventListener("DOMContentLoaded", () => {
-  initState(state);
-  renderLayout(state);
-});
-//посе загрузки генерироать фон в заисимости от настроек
-window.addEventListener("load", () => {
-  optionSource(state);
-  if (githubCheckbox.checked) {
-    state.photoSource = "github";
-    body.style.backgroundImage = `url(${setBg()})`;
-  }
-  if (unsplashCheckbox.checked) {
-    state.photoSource = "unsplash";
-    body.style.backgroundImage = `url(${linkBodyU})`;
-    getLinkToImageUnsplash();
-  }
-  if (flickrCheckbox.checked) {
-    state.photoSource = "flickr";
-    body.style.backgroundImage = `url(${linkBodyF})`;
-    getLinkToImageFlickr();
-  }
-});
-//для каждого чекбокса при изменении записывать в loccl storage и изменять state
+//для каждого чекбокса при изменении записывать в local storage и изменять state
 nodes.forEach((el) =>
   el.node.addEventListener("change", () => {
     setState(el.nodeName, el.node.checked, state);
@@ -125,22 +156,94 @@ nodes.forEach((el) =>
     addToStorage(state);
   })
 );
-//запись значений в cheeckboxes
+
+//при закрытии окна добавлять state в local storage
+window.addEventListener("beforeunload", () => addToStorage(state));
+//при загрузке окна выгружать state и записыать значения в checkboxes
+window.addEventListener("DOMContentLoaded", () => {
+  initState(state);
+  renderLayout(state);
+});
+//посе загрузки генерироать фон в зависимости от настроек
+window.addEventListener("load", () => {
+  optionSource(state);
+  getQuotes();
+  getTags();
+  daySet();
+  setBg();
+  if (state.photoSource === "github") {
+    body.style.backgroundImage = `url(${linkGithub()})`;
+    githubCheckbox.checked;
+    tagsInput.setAttribute("disabled", true);
+  }
+  if (state.photoSource === "unsplash") {
+    getLinkToImageUnsplash();
+    body.style.backgroundImage = `url(${linkUnsplash()})`;
+    githubCheckbox.checked;
+  }
+  if (state.photoSource === "flickr") {
+    getLinkToImageFlickr();
+    body.style.backgroundImage = `url(${linkFlickr()})`;
+    githubCheckbox.checked;
+  }
+  if (quoteInput.checked === true) {
+    change.classList.remove("hide");
+  }
+  if (quoteInput.checked === false) {
+    change.classList.add("hide");
+  }
+});
+
+//гитхаб
+githubCheckbox.addEventListener("change", () => {
+  if (githubCheckbox.checked) {
+    state.photoSource = "github";
+    body.style.backgroundImage = `url(${linkGithub()})`;
+    tagsInput.setAttribute("disabled", true);
+  }
+});
+//ансплеш
+unsplashCheckbox.addEventListener("change", () => {
+  if (unsplashCheckbox.checked) {
+    state.photoSource = "unsplash";
+    body.style.backgroundImage = `url(${linkUnsplash()})`;
+    tagsInput.removeAttribute("disabled");
+  }
+});
+//фликр
+flickrCheckbox.addEventListener("change", () => {
+  if (flickrCheckbox.checked) {
+    state.photoSource = "flickr";
+    body.style.backgroundImage = `url(${linkFlickr()})`;
+    tagsInput.removeAttribute("disabled");
+  }
+});
+//запись значений в radio
 function optionSource(state) {
-  if (state.photoSource == "github") {
+  if (state.photoSource === "github") {
     githubCheckbox.checked = true;
   } else {
     githubCheckbox.checked = false;
   }
-  if (state.photoSource == "flickr") {
+  if (state.photoSource === "flickr") {
     flickrCheckbox.checked = true;
   } else {
     flickrCheckbox.checked = false;
   }
-  if (state.photoSource == "unsplash") {
+  if (state.photoSource === "unsplash") {
     unsplashCheckbox.checked = true;
   } else {
     unsplashCheckbox.checked = false;
+  }
+  if (state.language === "ru") {
+    ru.checked = true;
+  } else {
+    ru.checked = false;
+  }
+  if (state.language === "en") {
+    en.checked = true;
+  } else {
+    en.checked = false;
   }
 }
 //закрытие и открытие меню
@@ -153,7 +256,7 @@ document.addEventListener("mouseup", (e) => {
     if (state.tags === false) {
       renamePlaceholderTag();
     } else {
-      tagsInput.textContent = state.tags;
+      tagsInput.value = state.tags;
     }
   }
   resizeIcon();
@@ -161,14 +264,14 @@ document.addEventListener("mouseup", (e) => {
 //функция выгрузки тега
 function getTags() {
   if (state.tags != false) {
-    tagsInput.value = state.tags;
+    tagsInput.textContent = state.tags;
   }
 }
 //клик по лупе
-loupe.addEventListener("click", () => {
-  tagsInput.blur();
-  saveTags();
-});
+// loupe.addEventListener("click", () => {
+//   tagsInput.blur();
+//   saveTags();
+// });
 //клик вне search
 document.addEventListener("click", (e) => {
   if (!tagsInput.contains(e.target)) {
@@ -176,13 +279,24 @@ document.addEventListener("click", (e) => {
     saveTags();
   }
 });
+// tagsInput.addEventListener("keydown", (e) => {
+// if (e.key === "Enter") {
+//   setBg()
+// }})
+
 //Enter при вводе в Input
-tagsInput.addEventListener("keypress", (e) => {
-  if (e.code === "Enter") {
-    tagsInput.blur();
-    saveTags();
-  }
-});
+tagsInput.addEventListener("keyup", (e) => {
+  saveTags();
+
+  if (e.key === "Enter") {
+    if (state.photoSource === "flickr") {
+      linkFlickr();
+    }
+    if (state.photoSource === "unsplash") {
+      linkUnsplash();
+    }
+  tagsInput.blur()
+}});
 //функция сохранения тегов
 function saveTags() {
   if (tagsInput.value != " " && tagsInput.value != "") {
@@ -208,36 +322,27 @@ function resizeIcon() {
 en.addEventListener("click", () => {
   if (en.type === "radio" && en.checked) {
     ru.removeAttribute("checked");
-    en.setAttribute("checked", "true");
+    en.setAttribute("checked", true);
     state.language = "en";
     getQuotes();
     timeOfDay();
     placeholder();
     renamePlaceholderTag();
-    if (city.textContent === lang().minsk){
-    city.textContent = "Minsk";
-  } else {
-      getLocalStorageCity();
-  getWeather();
+    renameMinsk();
   }
-}
 });
 
 ru.addEventListener("click", () => {
   if (ru.type === "radio" && ru.checked) {
     en.removeAttribute("checked");
-    ru.setAttribute("checked", "true");
+    ru.setAttribute("checked", true);
     state.language = "ru";
     getQuotes();
     timeOfDay();
     placeholder();
+    getWeather();
     renamePlaceholderTag();
-    if (city.textContent === lang().minsk){
-    city.textContent = "Minsk";
-  } else {
-      getLocalStorageCity();
-  getWeather();
-  }
+    renameMinsk();
   }
 });
 
@@ -246,29 +351,3 @@ function renamePlaceholderTag() {
   tagsInput.setAttribute("placeholder", `${lang().placeholderTag}`);
   tagsInput.textContent = lang().placeholderTag;
 }
-
-//гитхаб
-githubCheckbox.addEventListener("change", () => {
-  if (githubCheckbox.checked) {
-    state.photoSource = "github";
-    body.style.backgroundImage = `url(${setBg()})`;
-  }
-});
-//ансплеш
-let linkBodyU = localStorage.getItem("linkU");
-unsplashCheckbox.addEventListener("change", () => {
-  if (unsplashCheckbox.checked) {
-    state.photoSource = "unsplash";
-    body.style.backgroundImage = `url(${linkBodyU})`;
-    getLinkToImageUnsplash();
-  }
-});
-//фликр
-let linkBodyF = localStorage.getItem("linkF");
-flickrCheckbox.addEventListener("change", () => {
-  if (flickrCheckbox.checked) {
-    state.photoSource = "flickr";
-    body.style.backgroundImage = `url(${linkBodyF})`;
-    getLinkToImageFlickr();
-  }
-});

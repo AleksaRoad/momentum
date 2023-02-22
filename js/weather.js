@@ -68,9 +68,9 @@ window.addEventListener("load", () => {
     temperature.textContent == "Ой! Мы не нашли такого города!"||
     temperature.textContent == "Oops! Enter the name of the other city"
   ) {
-    getWeather();
     city.value = lang().minsk;
-    city.textContent = lang().minsk;
+    city.textContent = lang().minsk; 
+    getWeather();
   }
 });
 //при клике вне инпута загружать значения city по введенному пользователем

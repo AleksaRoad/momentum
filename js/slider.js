@@ -11,58 +11,66 @@ function getRandomNum(min, max) {
 }
 //функция перевода времени суток
 function daySet() {
-  let dayEn = "";
-  if (getTimeOfDay() === lang().morning) {
-    dayEn = langObj.en.morning
+  if (state.photoSource === "github" || !state.tags) {
+    if (getTimeOfDay() === lang().morning) {
+      return langObj.en.morning;
+    }
+    if (getTimeOfDay() === lang().afternoon) {
+      return langObj.en.afternoon;
+    }
+    if (getTimeOfDay() === lang().evening) {
+      return langObj.en.evening;
+    }
+    if (getTimeOfDay() === lang().night) {
+      return langObj.en.night;
+    }
+  } else {
+    return state.tags;
   }
-  if (getTimeOfDay() === lang().afternoon) {
-    dayEn = langObj.en.afternoon
-  }
-  if (getTimeOfDay() === lang().evening) {
-    dayEn = langObj.en.evening
-  }
-  if (getTimeOfDay() === lang().night) {
-    dayEn = langObj.en.night
-  }
-  // if (){}
-  return dayEn;
+}
+function linkFlickr() {
+  const img = new Image();
+  img.src = localStorage.getItem("linkF");
+  img.onload = () => {
+    getLinkToImageFlickr();
+    body.style.backgroundImage = `url(${localStorage.getItem("linkF")})`;
+  };
+  return img.src;
+}
+function linkUnsplash() {
+  const img = new Image();
+  img.src = localStorage.getItem("linkU");
+  img.onload = () => {
+    getLinkToImageUnsplash();
+    body.style.backgroundImage = `url(${localStorage.getItem("linkU")})`;
+  };
+  return img.src;
+}
+function linkGithub() {
+  let bgNum = String(randomNum).padStart(2, "0");
+  //предзагрузка изображений до отображения
+  const img = new Image();
+  img.src = `https://github.com/AleksaRoad/momentum-brain-image/blob/main/${daySet()}/${bgNum}.webp?raw=true)`;
+  img.onload = () => {
+    body.style.backgroundImage = `url("https://github.com/AleksaRoad/momentum-brain-image/blob/main/${daySet()}/${bgNum}.webp?raw=true")`;
+  };
+  return img.src;
 }
 //функция вывода рандомной фотографии
 function setBg() {
   //если фотохранилище Flickr
   if (state.photoSource === "flickr") {
-    const img = new Image();
-    img.src = localStorage.getItem("linkF");
-    img.onload = () => {
-      getLinkToImageFlickr();
-      body.style.backgroundImage = `url(${localStorage.getItem("linkF")})`;
-    };
-    return img.src
+    linkFlickr();
   }
   //если фотохранилище Unsplash
   if (state.photoSource === "unsplash") {
-    const img = new Image();
-    img.src = localStorage.getItem("linkU");
-    img.onload = () => {
-      getLinkToImageUnsplash();
-      body.style.backgroundImage = `url(${localStorage.getItem("linkU")})`;
-    };
-    return img.src;
+    linkUnsplash();
   }
   //если хранилище Github
   if (state.photoSource === "github") {
-    //запись числового значения фото
-    let bgNum = String(randomNum).padStart(2, "0");
-    //предзагрузка изображений до отображения
-    const img = new Image();
-    img.src = `https://github.com/AleksaRoad/momentum-brain-image/blob/main/${daySet()}/${bgNum}.webp?raw=true)`;
-    img.onload = () => {
-      body.style.backgroundImage = `url("https://github.com/AleksaRoad/momentum-brain-image/blob/main/${daySet()}/${bgNum}.webp?raw=true")`;
-    };
-    return img.src;
+    linkGithub();
   }
 }
-setBg();
 
 //клик вперед
 nextImg.addEventListener("click", getSlideNext);
