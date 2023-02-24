@@ -7,9 +7,9 @@ const change = document.querySelector(".change-quote");
 async function getQuotes() {
   let quotes = "";
   if (state.language == "ru") {
-    quotes = "../assets/quotes-ru.json";
+    quotes = "./assets/quotes-ru.json";
   } else {
-    quotes = "../assets/quotes-en.json";
+    quotes = "./assets/quotes-en.json";
   }
   const res = await fetch(quotes);
   const data = await res.json();
