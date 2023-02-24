@@ -5,20 +5,23 @@ const wind = document.querySelector(".wind");
 const humidity = document.querySelector(".humidity");
 const city = document.querySelector(".city");
 const error = document.querySelector(".error img");
-const weather = document.querySelector(".weather");  
+const weather = document.querySelector(".weather");
 
 // https://api.openweathermap.org/data/2.5/weather?q=%D0%9C%D0%B8%D0%BD%D1%81%D0%BA&lang=ru&appid=d2c7b0c7e51b3b0b62f5f6253e7edf70&units=metric
 
 //асинхронная функция загрузки погоды
 async function getWeather() {
   lang();
-  const BASE_URL = 'https://api.openweathermap.org' 
-  const ID_URL = 'd2c7b0c7e51b3b0b62f5f6253e7edf70'
-  const url = `${BASE_URL}/data/2.5/weather?q=${city.value}&lang=${lang().url}&appid=${ID_URL}&units=metric`
+  const BASE_URL = "https://api.openweathermap.org";
+  const ID_URL = "d2c7b0c7e51b3b0b62f5f6253e7edf70";
+  const url = `${BASE_URL}/data/2.5/weather?q=${city.value}&lang=${
+    lang().url
+  }&appid=${ID_URL}&units=metric`;
   const res = await fetch(url);
   const data = await res.json();
+
   if (data.cod === "404") {
-    temperature.textContent = lang().error
+    temperature.textContent = lang().error;
     weatherIcon.classList.remove();
     weatherIcon.style.display = "none";
     weatherDescription.textContent = "";
@@ -31,8 +34,12 @@ async function getWeather() {
     weatherIcon.classList.add(`owf-${data.weather[0].id}`);
     temperature.textContent = `${Math.round(data.main.temp)}°C`;
     weatherDescription.textContent = data.weather[0].description;
-    wind.textContent = `${lang().windSpeed}: ${Math.round(data.wind.speed)} ${lang().ms}`;
-    humidity.textContent = `${lang().humidity}: ${Math.round(data.main.humidity)}%`;
+    wind.textContent = `${lang().windSpeed}: ${Math.round(data.wind.speed)} ${
+      lang().ms
+    }`;
+    humidity.textContent = `${lang().humidity}: ${Math.round(
+      data.main.humidity
+    )}%`;
     error.classList.remove("active");
   }
 }
@@ -44,6 +51,7 @@ function setCity(event) {
     city.blur();
   }
 }
+
 city.addEventListener("keypress", setCity);
 //функция внесения города в local storage
 function setLocalStorageCity(value) {
@@ -52,6 +60,10 @@ function setLocalStorageCity(value) {
 //перед перезагрузкой окна запись в local storage
 window.addEventListener("beforeunload", () => {
   setLocalStorageCity(city.value);
+  if (error.classList.contains("active")) {
+    city.value = "";
+    setLocalStorageCity(city.value);
+  }
 });
 //функция возвращения города из local storage
 function getLocalStorageCity() {
@@ -64,12 +76,14 @@ window.addEventListener("load", () => {
   getLocalStorageCity();
   getWeather();
   if (
-    city.value == false ||
-    temperature.textContent == "Ой! Мы не нашли такого города!"||
-    temperature.textContent == "Oops! Enter the name of the other city"
+    city.value === false ||
+    error.classList.contains("active") ||
+    // temperature.textContent === 'Ой! Мы не нашли такого города!' ||
+    city.value === ""
   ) {
     city.value = lang().minsk;
-    city.textContent = lang().minsk; 
+    city.textContent = lang().minsk;
+    console.log("pisya");
     getWeather();
   }
 });
@@ -96,3 +110,6 @@ city.addEventListener("click", () => {
     city.value = "";
   }
 });
+
+// document.addEventListener("DOMContentLoaded", getWeather);
+// city.textContent = localStorage.getItem("city");

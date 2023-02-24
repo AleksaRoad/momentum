@@ -1,18 +1,15 @@
 @charset "UTF-8";
-
 /*----------*/
 @font-face {
   font-family: "Arial-MT";
   src: url("../assets/fonts/Arial-MT.woff");
   /* Путь к файлу со шрифтом */
 }
-
 @font-face {
   font-family: "Harry Potter";
   src: url("../assets/fonts/Harry Potter.ttf");
   /* Путь к файлу со шрифтом */
 }
-
 *,
 *::before,
 *::after {
@@ -94,6 +91,18 @@ body {
   padding: 20px;
 }
 
+.player {
+  z-index: 15;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 2s linear;
+}
+.player.hide {
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 2s linear;
+}
+
 .player-controls {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -142,7 +151,6 @@ body {
 .play {
   width: 40px;
   height: 40px;
-  background-size: 40px 40px;
   background-image: url("../assets/svg/play.svg");
 }
 
@@ -172,19 +180,18 @@ body {
   -webkit-box-align: start;
   -ms-flex-align: start;
   align-items: flex-start;
-  row-gap: 5px;
+  row-gap: 10px;
   width: 180px;
   min-height: 180px;
   text-align: left;
   opacity: 1;
   visibility: visible;
-  z-index: 0;
+  transition: opacity 2s linear;
 }
-
 .weather.hide {
   opacity: 0;
   visibility: hidden;
-  z-index: -1;
+  transition: visibility 2s linear;
 }
 
 .weather-error {
@@ -220,28 +227,22 @@ body {
   0% {
     transform: translate(1px, 1px) rotate(0deg);
   }
-
   10% {
     transform: translate(-1px, -2px) rotate(-1deg);
   }
-
   30% {
     transform: translate(3px, 2px) rotate(0deg);
   }
-
   50% {
     transform: translate(-1px, 2px) rotate(-1deg);
   }
-
   70% {
     transform: translate(3px, 1px) rotate(-1deg);
   }
-
   90% {
     transform: translate(1px, 2px) rotate(0deg);
   }
 }
-
 .city {
   width: 170px;
   height: 34px;
@@ -329,13 +330,12 @@ body {
   letter-spacing: -4px;
   opacity: 1;
   visibility: visible;
-  z-index: 0;
+  transition: opacity 2s linear;
 }
-
 .time.hide {
   opacity: 0;
   visibility: hidden;
-  z-index: -1;
+  transition: visibility 2s linear;
 }
 
 .date {
@@ -344,13 +344,12 @@ body {
   margin-bottom: 20px;
   opacity: 1;
   visibility: visible;
-  z-index: 0;
+  transition: opacity 2s linear;
 }
-
 .date.hide {
   opacity: 0;
   visibility: hidden;
-  z-index: -1;
+  transition: visibility 2s linear;
 }
 
 .greeting-container {
@@ -369,13 +368,12 @@ body {
   font-size: 40px;
   opacity: 1;
   visibility: visible;
-  z-index: 0;
+  transition: opacity 2s linear;
 }
-
 .greeting-container.hide {
   opacity: 0;
   visibility: hidden;
-  z-index: -1;
+  transition: visibility 2s linear;
 }
 
 .greeting {
@@ -465,22 +463,18 @@ input:focus:-ms-input-placeholder {
     min-height: 80px;
     font-size: 72px;
   }
-
   .greeting-container {
     min-height: 40px;
     font-size: 32px;
   }
-
   .greeting {
     padding: 5px;
   }
-
   .nameInput {
     font-size: 32px;
     padding: 5px;
   }
 }
-
 .player-icon,
 .slider-icon,
 .change-quote,
@@ -525,12 +519,12 @@ input:focus:-ms-input-placeholder {
 
 .slide-prev {
   left: 20px;
-  background-image: url("./assets/svg/slider-prev.svg");
+  background-image: url("../assets/svg/slider-prev.svg");
 }
 
 .slide-next {
   right: 20px;
-  background-image: url("./assets/svg/slider-next.svg");
+  background-image: url("../assets/svg/slider-next.svg");
 }
 
 .footer {
@@ -553,32 +547,39 @@ input:focus:-ms-input-placeholder {
   padding: 20px;
 }
 
-.settings-list li {
+.settings-list {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s linear;
+  padding: 15px;
+  background-color: rgb(173, 179, 182);
+  height: 0;
+  overflow: hidden;
+  border-radius: 40px;
+}
+.settings-list > li {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+  gap: 15px;
   text-align: start;
   font-size: 20px;
   color: #fff;
   padding: 5px;
   align-items: center;
 }
-
-.settings-list {
-  visibility: hidden;
-  opacity: 0;
-  transition: all 0.5s linear;
-  padding: 15px;
-  background-color: rgba(255, 255, 255, 0.2);
-  height: 0;
-  overflow: hidden;
+.settings-list .title-list {
+  justify-content: center;
+  margin-bottom: 15px;
 }
-
 .settings-list.active {
   visibility: visible;
   opacity: 1;
   transition: all 1s ease-in-out;
-  height: 500px;
+  height: 85vh;
+  z-index: 50;
+}
+.settings-list .source-three {
+  margin-block: 15px;
 }
 
 .settings-icon {
@@ -587,8 +588,8 @@ input:focus:-ms-input-placeholder {
   margin-top: -15px;
   animation: spin 4s linear infinite;
   z-index: 6;
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
   transition: all 0.3s linear;
 }
 
@@ -596,7 +597,7 @@ input:focus:-ms-input-placeholder {
   position: absolute;
   left: 55px;
   bottom: 40px;
-  z-index: 5;
+  z-index: 50;
 }
 
 .switch {
@@ -605,7 +606,6 @@ input:focus:-ms-input-placeholder {
   width: 60px;
   height: 34px;
 }
-
 .switch input {
   display: none;
 }
@@ -621,7 +621,6 @@ input:focus:-ms-input-placeholder {
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
-
 .slider:before {
   position: absolute;
   content: "";
@@ -634,15 +633,15 @@ input:focus:-ms-input-placeholder {
   transition: 0.4s;
 }
 
-input:checked+.slider {
+input:checked + .slider {
   background-color: #848585;
 }
 
-input:focus+.slider {
+input:focus + .slider {
   box-shadow: 0 0 1px rgba(143, 201, 228, 0.5);
 }
 
-input:checked+.slider:before {
+input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
@@ -652,7 +651,6 @@ input:checked+.slider:before {
 .slider.round {
   border-radius: 34px;
 }
-
 .slider.round:before {
   border-radius: 50%;
 }
@@ -662,17 +660,21 @@ input:checked+.slider:before {
   position: absolute;
   z-index: -1;
   opacity: 0;
+  /* для элемента label связанного с .custom-radio */
+  /* создание в label псевдоэлемента  before со следующими стилями */
+  /* стили при наведении курсора на радио */
+  /* стили для активной радиокнопки (при нажатии на неё) */
+  /* стили для радиокнопки, находящейся в фокусе */
+  /* стили для радиокнопки, находящейся в фокусе и не находящейся в состоянии checked */
+  /* стили для радиокнопки, находящейся в состоянии checked */
+  /* стили для радиокнопки, находящейся в состоянии disabled */
 }
-
-/* для элемента label связанного с .custom-radio */
-.custom-radio+label {
+.custom-radio + label {
   display: inline-flex;
   align-items: center;
   user-select: none;
 }
-
-/* создание в label псевдоэлемента  before со следующими стилями */
-.custom-radio+label::before {
+.custom-radio + label::before {
   content: "";
   display: inline-block;
   width: 1em;
@@ -686,37 +688,25 @@ input:checked+.slider:before {
   background-position: center center;
   background-size: 50% 50%;
 }
-
-/* стили при наведении курсора на радио */
-.custom-radio:not(:disabled):not(:checked)+label:hover::before {
+.custom-radio:not(:disabled):not(:checked) + label:hover::before {
   border-color: rgba(143, 201, 228, 0.5);
 }
-
-/* стили для активной радиокнопки (при нажатии на неё) */
-.custom-radio:not(:disabled):active+label::before {
+.custom-radio:not(:disabled):active + label::before {
   background-color: #848585;
   border-color: rgba(143, 201, 228, 0.5);
 }
-
-/* стили для радиокнопки, находящейся в фокусе */
-.custom-radio:focus+label::before {
+.custom-radio:focus + label::before {
   box-shadow: 0 0 0 0.2rem rgba(143, 201, 228, 0.5);
 }
-
-/* стили для радиокнопки, находящейся в фокусе и не находящейся в состоянии checked */
-.custom-radio:focus:not(:checked)+label::before {
+.custom-radio:focus:not(:checked) + label::before {
   border-color: rgba(143, 201, 228, 0.5);
 }
-
-/* стили для радиокнопки, находящейся в состоянии checked */
-.custom-radio:checked+label::before {
+.custom-radio:checked + label::before {
   border-color: rgba(143, 201, 228, 0.5);
   background-color: #848585;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
 }
-
-/* стили для радиокнопки, находящейся в состоянии disabled */
-.custom-radio:disabled+label::before {
+.custom-radio:disabled + label::before {
   background-color: #e9ecef;
 }
 
@@ -726,68 +716,51 @@ input:checked+.slider:before {
   cursor: text;
   margin-bottom: 10px;
   font-size: 16px;
+  padding: 4px;
 }
-
 .search-input .search:focus {
   outline-color: rgb(143, 201, 228);
-}
-
-.search-input img {
-  width: 20px;
-  height: 20px;
-  opacity: 0.5;
-  margin-top: 5px;
-  margin-left: -30px;
-  border: #848585 1px;
-  cursor: pointer;
 }
 
 @-moz-keyframes spin {
   from {
     -moz-transform: rotate(0deg);
   }
-
   to {
     -moz-transform: rotate(360deg);
   }
 }
-
 @-webkit-keyframes spin {
   from {
     -webkit-transform: rotate(0deg);
   }
-
   to {
     -webkit-transform: rotate(360deg);
   }
 }
-
 @keyframes spin {
   from {
     transform: rotate(0deg);
   }
-
   to {
     transform: rotate(360deg);
   }
 }
-
 .change-quote {
   position: absolute;
-  margin-bottom: 110px;
+  margin-bottom: 120px;
   opacity: 1;
   visibility: visible;
-  z-index: 0;
+  transition: opacity 2s linear;
 }
-
 .change-quote.hide {
   opacity: 0;
   visibility: hidden;
-  z-index: -1;
+  transition: visibility 2s linear;
 }
 
 .quote {
-  max-width: 750px;
+  max-width: 700px;
   min-height: 32px;
   margin-bottom: 10px;
   font-size: 20px;
@@ -801,11 +774,10 @@ input:checked+.slider:before {
 .data-quote {
   opacity: 1;
   visibility: visible;
-  z-index: 0;
+  transition: opacity 2s linear;
 }
-
 .data-quote.hide {
   opacity: 0;
   visibility: hidden;
-  z-index: -1;
+  transition: visibility 2s linear;
 }

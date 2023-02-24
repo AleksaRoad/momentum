@@ -71,8 +71,11 @@ function placeholder() {
   nameInput.setAttribute("placeholder", lang().placeholder);
 }
 //отрисовка placeholder или информации из local storage
-window.addEventListener("load", placeholder);
-window.addEventListener("load", getLocalStorage);
+window.addEventListener("DOMContentLoaded", () => {
+  placeholder();  
+  getLocalStorage();
+});
+
 //функция очищения local storage при изменении input
 nameInput.addEventListener("change", () => {
   setLocalStorage(nameInput.value.trim());

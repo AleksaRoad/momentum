@@ -37,3 +37,10 @@ change.addEventListener("click", () => {
 //   const num = +transform.match(/\d+/g)?.valueOf() || 0
 //   change.style.transform = `rotate(${180 + num}deg)`;
 // }
+quoteInput.addEventListener('click',()=>{
+if (quoteInput.checked === true){
+    change.classList.remove('hide')
+}
+if (quoteInput.checked === false){
+    change.classList.add('hide')}})
+

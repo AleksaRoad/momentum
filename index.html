@@ -1,130 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="assets/favicon.ico" rel="shortcut icon" />
-  <link rel="stylesheet" href="./css/owfont-regular.css" />
-  <link rel="stylesheet" href="./css/style.css" />
-  <title>momentum</title>
-</head>
-
-<body>
-  <header class="header">
-    <div class="player">
-      <div class="player-controls">
-        <button class="play-prev player-icon"></button>
-        <button class="play player-icon"></button>
-        <button class="play-next player-icon"></button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="assets/favicon.ico" rel="shortcut icon" />
+    <link rel="stylesheet" href="./css/owfont-regular.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>momentum</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="player">
+        <div class="player-controls">
+          <button class="play-prev player-icon"></button>
+          <button class="play player-icon"></button>
+          <button class="play-next player-icon"></button>
+        </div>
+        <ul class="play-list"></ul>
       </div>
-      <ul class="play-list"></ul>
-    </div>
-    <div class="weather">
-      <input class="city" type="text" />
-      <i class="weather-icon owf"></i>
-      <div class="duo">
-        <div class="temperature"></div>
-        <div class="weather-description"></div>
+      <div class="weather">
+        <input class="city" type="text" />
+        <i class="weather-icon owf"></i>
+        <div class="duo">
+          <div class="temperature"></div>
+          <div class="weather-description"></div>
+        </div>
+        <div class="wind"></div>
+        <div class="humidity"></div>
+        <div class="error">
+          <img src="./assets/img/error.png" alt="error" />
+        </div>
       </div>
-      <div class="wind"></div>
-      <div class="humidity"></div>
-      <div class="error">
-        <img src="./assets/img/error.png" alt="error" />
+    </header>
+    <main class="main">
+      <div class="slider-icons">
+        <button class="slide-prev slider-icon"></button>
+        <button class="slide-next slider-icon"></button>
       </div>
-    </div>
-  </header>
-  <main class="main">
-    <div class="slider-icons">
-      <button class="slide-prev slider-icon"></button>
-      <button class="slide-next slider-icon"></button>
-    </div>
-    <time class="time"></time>
-    <date class="date"></date>
-    <div class="greeting-container">
-      <span class="greeting"></span>
-      <input type="text" class="nameInput" />
-    </div>
-  </main>
-  <footer class="footer">
-    <div class="settings">
-      <ul class="settings-list">
-        <li>
-          <p>время</p>
-          <label class="switch">
-            <input type="checkbox" class="checkbox" />
-            <span class="slider round"></span>
-          </label>
-        </li>
-        <li>
-          <p>дата</p>
-          <label class="switch">
-            <input type="checkbox" class="checkbox" />
-            <span class="slider round"></span>
-          </label>
-        </li>
-        <li>
-          <p>приветствие</p>
-          <label class="switch">
-            <input type="checkbox" class="checkbox" />
-            <span class="slider round"></span>
-          </label>
-        </li>
-        <li>
-          <p>цитата</p>
-          <label class="switch">
-            <input type="checkbox" class="checkbox" />
-            <span class="slider round"></span>
-          </label>
-        </li>
-        <li>
-          <p>погода</p>
-          <label class="switch">
-            <input type="checkbox" class="checkbox" />
-            <span class="slider round"></span>
-          </label>
-        </li>
-        <li>
-          <input type="radio" class="custom-radio" name="source" id="github" value="github" checked="true" />
-          <label for="github">github</label><input type="radio" class="custom-radio" name="source" id="unsplash"
-            value="unsplash" />
-          <label for="unsplash">unsplash</label><input type="radio" class="custom-radio" name="source" id="flickr"
-            value="flickr" />
-          <label for="flickr">flickr</label>
-        </li>
-
-        <li>
-          <p>поиск</p>
-          <div class="search-input">
-            <input class="search" type="text" />
-            <img src="./assets/img/lup.png" alt="" class="loupe" />
-          </div>
-        </li>
-        <li class="language">
-          <p>язык</p>
-          <input type="radio" class="custom-radio" name="language" id="ru" value="ru" />
-          <label for="ru">ru</label><input type="radio" class="custom-radio" name="language" id="en" value="en"
-            checked="true" />
-          <label for="en">en</label>
-        </li>
-      </ul>
-      <img src="./assets/svg/settings.svg" alt="settings" class="settings-icon" />
-    </div>
-    <img src="./assets/svg/reload.svg" alt="reload" class="change-quote" />
-    <div class="data-quote">
-      <div class="quote"></div>
-      <div class="author"></div>
-    </div>
-  </footer>
-  <script src="./js/main.js"></script>
-  <script src="./js/language.js"></script>
-  <script src="./js/settings.js"></script>
-  <script src="./js/greeting.js"></script>
-  <script src="./js/time.js"></script>
-  <script src="./js/slider.js"></script>
-  <script src="./js/quotes.js"></script>
-  <script src="./js/weather.js"></script>
-  <script src="./js/sliderAPI.js"></script>
-</body>
-
+      <time class="time"></time>
+      <date class="date"></date>
+      <div class="greeting-container">
+        <span class="greeting"></span>
+        <input type="text" class="nameInput" />
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="settings">
+        <div class="render-settings"></div>
+        <ul class="settings-list">
+          <li class="title-list"><p class="text-set"></p></li>
+          <li>
+            <p class="text-set"></p>
+            <label class="switch">
+              <input type="checkbox" class="checkbox" />
+              <span class="slider round"></span>
+            </label>
+          </li>
+          <li>
+            <p class="text-set"></p>
+            <label class="switch">
+              <input type="checkbox" class="checkbox" />
+              <span class="slider round"></span>
+            </label>
+          </li>
+          <li>
+            <p class="text-set"></p>
+            <label class="switch">
+              <input type="checkbox" class="checkbox" />
+              <span class="slider round"></span>
+            </label>
+          </li>
+          <li>
+            <p class="text-set"></p>
+            <label class="switch">
+              <input type="checkbox" class="checkbox" />
+              <span class="slider round"></span>
+            </label>
+          </li>
+          <li>
+            <p class="text-set"></p>
+            <label class="switch">
+              <input type="checkbox" class="checkbox" />
+              <span class="slider round"></span>
+            </label>
+          </li>
+          <li>
+            <p class="text-set"></p>
+            <label class="switch">
+              <input type="checkbox" class="checkbox" />
+              <span class="slider round"></span>
+            </label>
+          </li>
+          <li class="title-list"><p class="text-set"></p></li>
+          <li class="source-three">
+            <input
+              type="radio"
+              class="custom-radio"
+              name="source"
+              id="github"
+              value="github"
+              checked="true"
+            />
+            <label for="github">github</label
+            ><input
+              type="radio"
+              class="custom-radio"
+              name="source"
+              id="unsplash"
+              value="unsplash"
+            />
+            <label for="unsplash">unsplash</label
+            ><input
+              type="radio"
+              class="custom-radio"
+              name="source"
+              id="flickr"
+              value="flickr"
+            />
+            <label for="flickr">flickr</label>
+          </li>
+          <li>
+            <p class="text-set"></p>
+            <div class="search-input">
+              <input class="search" type="search" />
+            </div>
+          </li>
+          <li class="title-list"><p class="text-set"></p></li>
+          <li class="language">
+            <input
+              type="radio"
+              class="custom-radio"
+              name="language"
+              id="ru"
+              value="ru"
+            />
+            <label for="ru">ru</label
+            ><input
+              type="radio"
+              class="custom-radio"
+              name="language"
+              id="en"
+              value="en"
+              checked="true"
+            />
+            <label for="en">en</label>
+          </li>
+        </ul>
+        <img
+          src="./assets/svg/settings4.svg"
+          alt="settings"
+          class="settings-icon"
+        />
+      </div>
+      <img src="./assets/svg/reload.svg" alt="reload" class="change-quote" />
+      <div class="data-quote">
+        <div class="quote"></div>
+        <div class="author"></div>
+      </div>
+    </footer>
+    <script src="./js/main.js"></script>
+    <script src="./js/language.js"></script>
+    <script src="./js/settings.js"></script>
+    <script src="./js/greeting.js"></script>
+    <script src="./js/time.js"></script>
+    <script src="./js/slider.js"></script>
+    <script src="./js/quotes.js"></script>
+    <script src="./js/weather.js"></script>
+    <script src="./js/sliderAPI.js"></script>
+    <script src="./js/player.js"></script>
+  </body>
 </html>
