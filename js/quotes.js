@@ -1,4 +1,4 @@
-// import jsonContent from "./data.json" assert { type: "json" };
+
 const quoteText = document.querySelector(".quote");
 const quoteAuthor = document.querySelector(".author");
 const change = document.querySelector(".change-quote");
@@ -20,23 +20,24 @@ async function getQuotes() {
   quoteText.textContent = quote;
   quoteAuthor.textContent = author;
   localStorage.setItem("quote", quote);
-// quoteText.style.transition = "1s"
+
 }
-getQuotes();
+
 //клик на reloder анимация кручения и вызов новой цитаты
 let count = 1;
 change.addEventListener("click", () => {
   getQuotes();
   change.style = `transform:rotate(${180 * count}deg)`;
-  count += 1;
+  count ++;
 });
 
-//вариант кручения без глобальной переменной
+// //вариант кручения без глобальной переменной
 // change.onclick = () => {
 //   const { transform } = change.style
 //   const num = +transform.match(/\d+/g)?.valueOf() || 0
 //   change.style.transform = `rotate(${180 + num}deg)`;
 // }
+
 quoteInput.addEventListener('click',()=>{
 if (quoteInput.checked === true){
     change.classList.remove('hide')

@@ -12,10 +12,64 @@
     <header class="header">
       <div class="player">
         <div class="player-controls">
-          <button class="play-prev player-icon"></button>
-          <button class="play player-icon"></button>
-          <button class="play-next player-icon"></button>
+          <div class="left-autoplay">
+            <div class="left-controls">
+              <button class="prev player-icon" onclick="previous_song()">
+                <img src="../assets/svg/play-prev.svg" alt="prev" />
+              </button>
+              <button class="play player-icon" onclick="justplay()">
+                <img src="../assets/svg/play.svg" alt="play" />
+              </button>
+              <button class="next player-icon" onclick="next_song()">
+                <img src="../assets/svg/play-next.svg" alt="next" />
+              </button>
+            </div>
+
+            <div class="autoplay-container">
+              <div class="duration">
+                <p class="title">title.mp3</p>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value="0"
+                  id="duration_slider"
+                  onchange="change_duration()"
+                />
+                <div class="timer">
+                  <p class="time-song">00:00</p>
+                  /
+                  <p class="realtime">00:00</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="right-controls volume">
+            <div class="vol">
+              <button class="volume_icon player-icon" onclick="mute_sound()">
+                <img
+                  src="../assets/svg/maxsound.svg"
+                  alt="maxsound"
+                  id="sound"
+                />
+              </button>
+              <p id="volume_show">60</p>
+            </div>
+            <input
+              class="styled-slider"
+              type="range"
+              min="0"
+              max="100"
+              value="60"
+              onchange="volume_change()"
+              id="volume"
+            />
+            <button class="auto player-icon" onclick="autoplay_switch()">
+              <img src="../assets/svg/switch.svg" alt="switch" />
+            </button>
+          </div>
         </div>
+
         <ul class="play-list"></ul>
       </div>
       <div class="weather">
@@ -166,7 +220,6 @@
     <script src="./js/slider.js"></script>
     <script src="./js/quotes.js"></script>
     <script src="./js/weather.js"></script>
-    <script src="./js/sliderAPI.js"></script>
     <script src="./js/player.js"></script>
   </body>
 </html>

@@ -78,12 +78,10 @@ window.addEventListener("load", () => {
   if (
     city.value === false ||
     error.classList.contains("active") ||
-    // temperature.textContent === 'Ой! Мы не нашли такого города!' ||
     city.value === ""
   ) {
     city.value = lang().minsk;
     city.textContent = lang().minsk;
-    console.log("pisya");
     getWeather();
   }
 });
@@ -111,5 +109,3 @@ city.addEventListener("click", () => {
   }
 });
 
-// document.addEventListener("DOMContentLoaded", getWeather);
-// city.textContent = localStorage.getItem("city");
